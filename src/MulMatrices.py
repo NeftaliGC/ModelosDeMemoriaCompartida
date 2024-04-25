@@ -1,37 +1,34 @@
-class MulMatrices:
-    @staticmethod
-    def print_matrix(matrix):
-        for row in matrix:
-            print('\t'.join(map(str, row)))
-        print()
+import threading
+import math
+# Función para multiplicar matrices C = A * B
+def multiply_matrices(A, B, C, n, start, end):
+    for i in range(start, end):
+        for j in range(n):
+            for k in range(n):
+                C[i][j] += A[i][k] * B[k][j]
 
-    @staticmethod
-    def multiply_matrices(A, B, n):
-        C = np.zeros((n, n, n), dtype=int)
+# Función para realizar el paso 2 del algoritmo
+def step_two(C, n, L):
+    for i in range(n):
+        for j in range(n):
+            for k in range(n // 2):
+                if (2 * k) % (2 ** L) == 0:
+                    C[i][j][2 * k] += C[i][j][2 * k - 2 ** (L - 1)]
 
-        # Paso 1: Multiplicación de elementos individuales
-        def multiply(i, j, k):
-            C[i, j, k] = A[i, k] * B[k, j]
-            print(f'C[{i},{j},{k}] = A[{i},{k}] * B[{k},{j}] = {C[i, j, k]}')
+# Función principal para el algoritmo MatMultCREW
+def MatMultCREW(A, B, C, n):
+    # Paso 1: Multiplicar matrices
+    threads = []
+    for i in range(n):
+        for j in range(n):
+            thread = threading.Thread(target=multiply_matrices, args=(A, B, C, n, i, i+1))
+            thread.start()
+            threads.append(thread)
 
-        threads = []
-        for i in range(n):
-            for j in range(n):
-                for k in range(n):
-                    thread = threading.Thread(target=multiply, args=(i, j, k))
-                    threads.append(thread)
-                    thread.start()
+    # Esperar a que todos los hilos terminen
+    for thread in threads:
+        thread.join()
 
-        for thread in threads:
-            thread.join()
-
-        # Paso 2: Suma de elementos para obtener el resultado final
-        for L in range(1, int(np.log2(n)) + 1):
-            for i in range(n):
-                for j in range(n):
-                    for k in range(1, n // 2 + 1):
-                        if (2 * k) % 2 ** L == 0:
-                            C[i, j, 2 * k - 1] += C[i, j, 2 * k - 1 - 2 ** (L - 1)]
-                            print(f'C[{i},{j},{2 * k - 1}] += C[{i},{j},{2 * k - 1 - 2 ** (L - 1)}]')
-
-        return C
+    # Paso 2: Realizar la suma acumulativa
+    for L in range(1, int(math.log2(n)) + 1):
+        step_two(C, n, L)

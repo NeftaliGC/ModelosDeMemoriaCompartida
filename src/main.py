@@ -58,7 +58,7 @@ def defineVector():
     vector = list(map(int, input("Ingrese los valores del vector separados por espacios: ").split(" ")))
     return vector
 
-def defineMatrix():
+def defineMatrix(n):
     matrix = []
     n = input("Ingrese el número de filas y columnas de la matriz: ")
     if n != "":
@@ -71,7 +71,19 @@ def defineMatrix():
             matrix.append(row)
     else:
         print("Matriz por defecto")
+        if n == 2:
 
+            A = [
+                [1, 2, 3],
+                [4, 5, 6],
+                [7, 8, 9]
+                ]
+        elif n == 1:
+            B = [
+                [9, 8, 7],
+                [6, 5, 4],
+                [3, 2, 1]
+                ]
     return matrix
 
 if __name__ == "__main__":
