@@ -1,3 +1,4 @@
+import threading
 import math
 
 def broadcast(A, x):
@@ -16,27 +17,27 @@ def broadcast(A, x):
             t.join()
 
 def broadcastParallel(A, i, j):
-    A[j - 1] = A[j - int(math.pow(2, i - 1)) - 1]
+    A[j - 1] = A[j - int(math.pow(2, i - 1))]
 
 def minimo(L):
     n = len(L)
     logMin = int(math.log2(n))
     ts = []
-    for i in range(1, logMin - 1):
-        jEndMin = n / math.pow(2, i)
+    for j in range(1, logMin):
+        iEndMin = int(n / math.pow(2, j) - 1)
 
-        for j in range(1, jEndMin):
+        for i in range(0, iEndMin):
             t = threading.Thread(target=minimoThread, args=(L, i, j))
             ts.append(t)
             t.start()
         
         for t in ts:
             t.join()
-    return L[1]
+    return L
 
 def minimoThread(L, i, j):
-    index1 = math.pow(2, j) * i
-    index2 = index1 + math.pow(2, j - 1)
+    index1 = int(math.pow(2, j) * i)
+    index2 = int(index1 + math.pow(2, j - 1))
     if (L[index1] > L[index2]):
         temp = L[index1]
         L[index1] = L[index2]
@@ -62,12 +63,12 @@ def busquedaEREW(A, x):
     for t in ts:
         t.join()
     
-    return minimo(A)
+    return minimo(Temp)
 
 def busquedaEREWThread(A, Temp, x, i):
-    for i in range(1, len(A)):
+    for i in range(0, len(A)):
         if (A[i] == Temp[i]):
-            Temp[i] = 1
+            Temp[i] = i
         else:
             #infinito
             Temp[i] = float('inf')

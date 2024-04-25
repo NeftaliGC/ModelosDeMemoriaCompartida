@@ -35,9 +35,9 @@ def main():
             # Busqueda EREW
             vector = defineVector()
             x = int(input("Ingrese el valor a buscar: "))
-
+            #2 -1 23 -4 2 5 -2 0 5 1 5 -5 8 5 3 -2
             busquedaEREW(vector, x)
-            print(f"Resultado: {vector}")
+            print(f"Posición: {vector.index(x)}")
             pass
         elif option == "4":
             # Busqueda y Ordenamiento CRCW
