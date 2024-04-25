@@ -1,7 +1,10 @@
 from sumaEREW import sumaEREW
 from OrdenamientoEREW import MergeSortPRAM
 from MulMatrices import MatMultCREW
+from busquedaEREW import busquedaEREW
 import time
+
+
 def main():
     print("---------------Modelos de memoria compartida---------------")
 
@@ -30,6 +33,11 @@ def main():
             pass
         elif option == "3":
             # Busqueda EREW
+            vector = defineVector()
+            x = int(input("Ingrese el valor a buscar: "))
+
+            BusquedaEREW(vector, x)
+            print(f"Resultado: {vector}")
             pass
         elif option == "4":
             # Busqueda y Ordenamiento CRCW
@@ -37,20 +45,15 @@ def main():
         elif option == "5":
             # Ordenamiento EREW
             arr1 = defineVector()
-            MergeSortPRAM(arr1,len(arr1))
+            merge_sort_pram(arr1,len(arr1))
             print(arr1)
             pass
         elif option == "6":
             # Multiplicacion de Matrices CREW
-            matriz1 = defineMatrix(1)
-            matriz2 = defineMatrix(2)
-            n = len(matriz1)
-            matrizResul = []
-            MatMultCREW(matriz1,matriz2, matrizResul, n)
-            print("Matriz Resultado:")
-            for row in matrizResul:
-                print(row)
-
+            matrix1 = defineMatrix(x = 1)
+            matrix2 = defineMatrix(x = 2)
+            print(f"Matriz 1: {matrix1}")
+            print(f"Matriz 2: {matrix2}")
             pass
         elif option == "7":
             print("Saliendo...")
@@ -66,10 +69,10 @@ def defineVector():
     vector = list(map(int, input("Ingrese los valores del vector separados por espacios: ").split(" ")))
     return vector
 
-def defineMatrix(n):
+def defineMatrix(x):
     matrix = []
-    n = input("Ingrese el número de filas y columnas de la matriz: ")
-    if n != "":
+    if n != "" and x == 0:
+        n = input("Ingrese el número de filas y columnas de la matriz: ")
         n = int(n)
         m = n
         for i in range(n):
@@ -79,15 +82,14 @@ def defineMatrix(n):
             matrix.append(row)
     else:
         print("Matriz por defecto")
-        if n == 2:
-
-            A = [
+        if x == 2:
+            matrix = [
                 [1, 2, 3],
                 [4, 5, 6],
                 [7, 8, 9]
                 ]
-        elif n == 1:
-            B = [
+        elif x == 1:
+            matrix = [
                 [9, 8, 7],
                 [6, 5, 4],
                 [3, 2, 1]
