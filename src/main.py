@@ -1,3 +1,5 @@
+from sumaEREW import sumaEREW
+
 def main():
     print("---------------Modelos de memoria compartida---------------")
 
@@ -15,6 +17,9 @@ def main():
 
         if option == "1":
             # Suma EREW
+            vector = defineVector()
+            sumaEREW(vector)
+            print(f"Resultado: {vector}")
             pass
         elif option == "2":
             # Suma CREW
