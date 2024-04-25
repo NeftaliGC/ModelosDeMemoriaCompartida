@@ -6,7 +6,7 @@ def sumaEREW(A):
     logn = int(math.log2(n))
     ts = []
     for i in range(1, logn + 1):
-        for j in range(1, (int)(a/2)+1):
+        for j in range(1, (int)(n/2)+1):
             t = threading.Thread(target=sumaEREWThread, args=(A, j, i))
             ts.append(t)
             t.start()

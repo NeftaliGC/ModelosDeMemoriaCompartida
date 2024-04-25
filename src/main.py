@@ -20,6 +20,8 @@ def main():
         if option == "1":
             # Suma EREW
             vector = defineVector()
+            # Agrega un 0 al inicio del vector
+            vector.insert(0, 0)
             sumaEREW(vector)
             print(f"Resultado: {vector}")
             pass
@@ -58,13 +60,17 @@ def defineVector():
 
 def defineMatrix():
     matrix = []
-    n = int(input("Ingrese el número de filas y columnas de la matriz: "))
-    m = n
-    for i in range(n):
-        row = []
-        for j in range(m):
-            row.append(int(input(f"Ingrese el valor de la posición ({i+1},{j+1}): ")))
-        matrix.append(row)
+    n = input("Ingrese el número de filas y columnas de la matriz: ")
+    if n != "":
+        n = int(n)
+        m = n
+        for i in range(n):
+            row = []
+            for j in range(m):
+                row.append(int(input(f"Ingrese el valor de la posición ({i+1},{j+1}): ")))
+            matrix.append(row)
+    else:
+        print("Matriz por defecto")
 
     return matrix
 
