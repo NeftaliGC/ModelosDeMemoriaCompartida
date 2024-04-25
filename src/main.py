@@ -33,7 +33,11 @@ def main():
             pass
         elif option == "3":
             # Busqueda EREW
+            vector = defineVector()
+            x = int(input("Ingrese el valor a buscar: "))
 
+            BusquedaEREW(vector, x)
+            print(f"Resultado: {vector}")
             pass
         elif option == "4":
             # Busqueda y Ordenamiento CRCW
@@ -75,6 +79,19 @@ def defineMatrix():
             matrix.append(row)
     else:
         print("Matriz por defecto")
+        if n == 2:
+
+            A = [
+                [1, 2, 3],
+                [4, 5, 6],
+                [7, 8, 9]
+                ]
+        elif n == 1:
+            B = [
+                [9, 8, 7],
+                [6, 5, 4],
+                [3, 2, 1]
+                ]
     return matrix
 
 if __name__ == "__main__":
