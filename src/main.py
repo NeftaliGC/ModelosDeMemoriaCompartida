@@ -55,8 +55,8 @@ def defineVector():
 
 def defineMatrix():
     matrix = []
-    n = int(input("Ingrese el número de filas de la matriz: "))
-    m = int(input("Ingrese el número de columnas de la matriz: "))
+    n = int(input("Ingrese el número de filas y columnas de la matriz: "))
+    m = n
     for i in range(n):
         row = []
         for j in range(m):
