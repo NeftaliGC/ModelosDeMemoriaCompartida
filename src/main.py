@@ -1,7 +1,10 @@
 from sumaEREW import sumaEREW
 from OrdenamientoEREW import merge_sort_pram
 from MulMatrices import MulMatrices
+from BusquedaEREW import BusquedaEREW
 import time
+
+
 def main():
     print("---------------Modelos de memoria compartida---------------")
 
@@ -30,6 +33,7 @@ def main():
             pass
         elif option == "3":
             # Busqueda EREW
+
             pass
         elif option == "4":
             # Busqueda y Ordenamiento CRCW

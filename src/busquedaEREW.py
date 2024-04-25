@@ -44,22 +44,30 @@ def minimoThread(L, i, j):
 
 def busquedaEREW(A, x):
 
-    
+    Temp = []
+    for i in range(0, len(A)):
+        Temp.append(0)
 
-    t = threading.Thread(target=broadcast, args=(A, x))
+
+    t = threading.Thread(target=broadcast, args=(Temp, x))
     t.start()
     t.join()
 
-
-
+    ts = []
     for i in range(1, len(A)):
-        if (A[i] == x):
-
+        t = threading.Thread(target=busquedaEREWThread, args=(A, Temp, x, i))
+        ts.append(t)
+        t.start()
+    
+    for t in ts:
+        t.join()
+    
     return minimo(A)
 
-def busquedaEREWThread(A, x):
+def busquedaEREWThread(A, Temp, x, i):
     for i in range(1, len(A)):
-        if (A[i] == x):
-            A[i] = 1
+        if (A[i] == Temp[i]):
+            Temp[i] = 1
         else:
-            A[i] = 0
+            #infinito
+            Temp[i] = float('inf')
