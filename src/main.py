@@ -2,7 +2,7 @@ from sumaEREW import sumaEREW
 from OrdenamientoEREW import merge_sort_pram
 from MulMatrices import MatMultCREW
 from busquedaEREW import busquedaEREW
-import time
+
 
 
 def main():
@@ -53,15 +53,14 @@ def main():
             # Multiplicacion de Matrices CREW
             matrix1 = defineMatrix(x = 1)
             matrix2 = defineMatrix(x = 2)
-            matrixResul = []
+            matrixResul = [
+
+                        ]
             l = len(matrix1)
-            print(f"Matriz 1: {matrix1}")
-            print(f"Matriz 2: {matrix2}")
-            MatMultCREW(matrix1,matrix2,matrixResul,l)
-            print("Matriz Resultado:")
-            for row in matrixResul:
-                print(row)
             
+            print("Matriz Resultado:")
+            for fila in matrixResul:
+                print(fila)
             pass
         elif option == "7":
             print("Saliendo...")
