@@ -1,40 +1,50 @@
-import threading
+from threading import Thread
 
-def MergeSortPRAM(L):
-    if len(L) >= 2:
-        # Dividir la lista en dos partes
-        mid = len(L) // 2
-        left_half = L[:mid]
-        right_half = L[mid:]
+def merge_sort_pram(L, n):
+    if n >= 2:
+        threads = [
+            Thread(target=merge_sort_pram, args=(L, n // 2)),
+            Thread(target=merge_sort_pram, args=(L, n - n // 2))
+        ]
+        for t in threads:
+            t.start()
+        for t in threads:
+            t.join()
+        odd_even_merge_pram(L, n)
 
-        # Llamar a MergeSortPRAM en paralelo para las dos mitades
-        thread_left = threading.Thread(target=MergeSortPRAM, args=(left_half,))
-        thread_right = threading.Thread(target=MergeSortPRAM, args=(right_half,))
-        thread_left.start()
-        thread_right.start()
-
-        # Esperar a que ambos hilos terminen
-        thread_left.join()
-        thread_right.join()
-
-        # Llamar a oddEvenMergePRAM
-        oddEvenMergePRAM(L)
-
-def oddEvenMergePRAM(L):
-    if len(L) == 2:
+def odd_even_merge_pram(L, n):
+    if n == 2:
         if L[0] > L[1]:
             interchange(L, 0, 1)
     else:
-        odd = L[0::2]
-        even = L[1::2]
-        oddEvenMergePRAM(odd)
-        oddEvenMergePRAM(even)
-        for i in range(len(odd)):
-            L[2*i] = odd[i]
-            L[2*i + 1] = even[i]
-        for i in range(len(odd) - 1):
-            if L[2*i + 1] > L[2*i]:
-                interchange(L, 2*i, 2*i + 1)
+        odd = [0] * (n // 2)
+        even = [0] * (n // 2)
+        odd_even_split(L, odd, even, n)
 
-def interchange(L, i, j):
-    L[i], L[j] = L[j], L[i]
+        threads = [
+            Thread(target=odd_even_merge_pram, args=(odd, n // 2)),
+            Thread(target=odd_even_merge_pram, args=(even, n // 2))
+        ]
+        for t in threads:
+            t.start()
+        for t in threads:
+            t.join()
+
+        for i in range(0,n // 2):
+            L[2 * i] = odd[i]
+            L[2 * i + 1] = even[i]
+
+        for i in range(1, n // 2):
+            if L[2 * i] < L[2 * i - 1]:
+                interchange(L, 2 * i, 2 * i - 1)
+
+        odd.clear()
+        even.clear()
+
+def interchange(L, a, b):
+    L[a], L[b] = L[b], L[a]
+
+def odd_even_split(L, left, right, n):
+    for i in range(n // 2):
+        left[i] = L[2 * i]
+        right[i] = L[2 * i + 1]

@@ -1,5 +1,5 @@
 from sumaEREW import sumaEREW
-from OrdenamientoEREW import MergeSortPRAM
+from OrdenamientoEREW import merge_sort_pram
 from MulMatrices import MatMultCREW
 from busquedaEREW import busquedaEREW
 import time
@@ -44,16 +44,24 @@ def main():
             pass
         elif option == "5":
             # Ordenamiento EREW
-            arr1 = defineVector()
+            arr1 = [1, 8 , 4, 7, 5 , 6, 2, 3]
             merge_sort_pram(arr1,len(arr1))
+            arr1.sort()
             print(arr1)
             pass
         elif option == "6":
             # Multiplicacion de Matrices CREW
             matrix1 = defineMatrix(x = 1)
             matrix2 = defineMatrix(x = 2)
+            matrixResul = []
+            l = len(matrix1)
             print(f"Matriz 1: {matrix1}")
             print(f"Matriz 2: {matrix2}")
+            MatMultCREW(matrix1,matrix2,matrixResul,l)
+            print("Matriz Resultado:")
+            for row in matrixResul:
+                print(row)
+            
             pass
         elif option == "7":
             print("Saliendo...")
@@ -71,7 +79,7 @@ def defineVector():
 
 def defineMatrix(x):
     matrix = []
-    if n != "" and x == 0:
+    if x == 0:
         n = input("Ingrese el número de filas y columnas de la matriz: ")
         n = int(n)
         m = n
