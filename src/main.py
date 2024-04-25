@@ -1,5 +1,7 @@
 from sumaEREW import sumaEREW
 from OrdenamientoEREW import merge_sort_pram
+from MulMatrices import MulMatrices
+import time
 def main():
     print("---------------Modelos de memoria compartida---------------")
 
@@ -32,11 +34,13 @@ def main():
             pass
         elif option == "5":
             # Ordenamiento EREW
-            arr1 = defineVector();
+            arr1 = defineVector()
             merge_sort_pram(arr1,len(arr1))
+            print(arr1)
             pass
         elif option == "6":
             # Multiplicacion de Matrices CREW
+            
             pass
         elif option == "7":
             print("Saliendo...")
