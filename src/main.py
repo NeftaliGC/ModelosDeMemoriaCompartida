@@ -49,16 +49,13 @@ def main():
 
 def defineVector():
     vector = []
-    n = int(input("Ingrese el tamaño del vector: "))
-    for i in range(n):
-        vector.append(int(input(f"Ingrese el valor del elemento {i+1}: ")))
-
+    vector = list(map(int, input("Ingrese los valores del vector separados por espacios: ").split(" ")))
     return vector
 
 def defineMatrix():
     matrix = []
-    n = int(input("Ingrese el número de filas de la matriz: "))
-    m = int(input("Ingrese el número de columnas de la matriz: "))
+    n = int(input("Ingrese el número de filas y columnas de la matriz: "))
+    m = n
     for i in range(n):
         row = []
         for j in range(m):
