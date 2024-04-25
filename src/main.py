@@ -1,5 +1,5 @@
 from sumaEREW import sumaEREW
-
+from OrdenamientoEREW import merge_sort_pram
 def main():
     print("---------------Modelos de memoria compartida---------------")
 
@@ -32,6 +32,8 @@ def main():
             pass
         elif option == "5":
             # Ordenamiento EREW
+            arr1 = defineVector();
+            merge_sort_pram(arr1,len(arr1))
             pass
         elif option == "6":
             # Multiplicacion de Matrices CREW
