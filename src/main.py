@@ -2,6 +2,8 @@ from sumaEREW import sumaEREW
 from OrdenamientoEREW import merge_sort_pram
 from MulMatrices import MatMultCREW
 from busquedaEREW import busquedaEREW
+from sumaCREW import suma_CREW
+from busquedaOrdenamientoCRCW import min_thread, sort_thread
 import time
 
 
@@ -30,6 +32,9 @@ def main():
             pass
         elif option == "2":
             # Suma CREW
+            vector = defineVector()
+            hide_zeros = True
+            suma_CREW(vector, hide_zeros)
             pass
         elif option == "3":
             # Busqueda EREW
@@ -41,6 +46,11 @@ def main():
             pass
         elif option == "4":
             # Busqueda y Ordenamiento CRCW
+            vector = defineVector()
+            print(f"Vector: {vector}")
+            print(f"Valor mínimo: {min_thread(vector.copy())}")
+            sort_thread(vector)
+            print(f"Vector ordenado: {vector}")
             pass
         elif option == "5":
             # Ordenamiento EREW
@@ -53,15 +63,20 @@ def main():
             # Multiplicacion de Matrices CREW
             matrix1 = defineMatrix(x = 1)
             matrix2 = defineMatrix(x = 2)
-            matrixResul = []
+            matrixResul = [[
+                            [0,0,0],[0,0,0],[0,0,0]],
+                [[0,0,0],[0,0,0],[0,0,0]],
+                [[0,0,0],[0,0,0],[0,0,0]]]
             l = len(matrix1)
             print(f"Matriz 1: {matrix1}")
             print(f"Matriz 2: {matrix2}")
             MatMultCREW(matrix1,matrix2,matrixResul,l)
             print("Matriz Resultado:")
-            for row in matrixResul:
-                print(row)
-            
+            # imprimir solo las columnas de la matriz en profuncidad 0
+            for i in range(3):
+                for j in range(len(matrixResul[i])):
+                    print(matrixResul[i][j][0], end=" ")
+                print("\n")
             pass
         elif option == "7":
             print("Saliendo...")
