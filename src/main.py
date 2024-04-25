@@ -65,7 +65,6 @@ def defineMatrix():
             matrix.append(row)
     else:
         print("Matriz por defecto")
-
     return matrix
 
 if __name__ == "__main__":
