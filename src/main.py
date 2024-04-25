@@ -47,10 +47,7 @@ def main():
 
 def defineVector():
     vector = []
-    n = int(input("Ingrese el tamaño del vector: "))
-    for i in range(n):
-        vector.append(int(input(f"Ingrese el valor del elemento {i+1}: ")))
-
+    vector = list(map(int, input("Ingrese los valores del vector separados por espacios: ").split(" ")))
     return vector
 
 def defineMatrix():

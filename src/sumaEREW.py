@@ -15,6 +15,6 @@ def sumaEREW(A):
             t.join()
 
 def sumaEREWThread(A, j, i):
-    x = (2 * j) % int(math.pow(2, i + 1))
+    x = (2 * j) % int(math.pow(2, i))
     if (x == 0):
-        A[2 * j] += A[int(((2 * j) - 1) - math.pow(2, i))]
+        A[2 * j] += A[int(((2 * j)) - math.pow(2, i - 1))]
