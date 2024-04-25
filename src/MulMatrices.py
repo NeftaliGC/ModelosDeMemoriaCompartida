@@ -1,5 +1,6 @@
 import threading
 import math
+
 # Función para multiplicar matrices C = A * B
 def multiply_matrices(A, B, C, n, start, end):
     for i in range(start, end):
@@ -20,10 +21,9 @@ def MatMultCREW(A, B, C, n):
     # Paso 1: Multiplicar matrices
     threads = []
     for i in range(n):
-        for j in range(n):
-            thread = threading.Thread(target=multiply_matrices, args=(A, B, C, n, i, i+1))
-            thread.start()
-            threads.append(thread)
+        thread = threading.Thread(target=multiply_matrices, args=(A, B, C, n, i, i+1))
+        thread.start()
+        threads.append(thread)
 
     # Esperar a que todos los hilos terminen
     for thread in threads:
